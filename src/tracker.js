@@ -98,7 +98,6 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
   }
 
   unregisterListeners () {
-    console.log("Unregistering all events for my Video Tracker")
     this.tag.removeEventListener('loadstart', this.onLoadStartListener)
     this.tag.removeEventListener('loadedmetadata', this.onLoadedMetadataListener)
     this.tag.removeEventListener('loadeddata', this.onLoadedDataListener)
