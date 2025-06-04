@@ -9,11 +9,23 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
   }
 
   getTrackerName() {
-    return "shaka";
+    return 'shaka';
   }
 
   getTrackerVersion() {
     return version;
+  }
+
+  getInstrumentationProvider() {
+    return 'New Relic';
+  }
+
+  getInstrumentationName() {
+    return this.getPlayerName();
+  }
+
+  getInstrumentationVersion() {
+    return this.getPlayerVersion();
   }
 
   isLive() {
@@ -34,7 +46,7 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
       var track = tracks[i];
       if (
         track.active &&
-        (track.type === "video" || track.type === "variant")
+        (track.type === 'video' || track.type === 'variant')
       ) {
         return track;
       }
@@ -44,6 +56,14 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
 
   getLanguage() {
     return this.getTrack().language;
+  }
+
+  getPlayerName() {
+    return 'Shaka';
+  }
+
+  getBitrate() {
+    return this.player.getStats().streamBandwidth;
   }
 
   getRenditionName() {
@@ -67,20 +87,19 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
   }
 
   registerListeners() {
-
     nrvideo.Log.debugCommonVideoEvents(this.tag);
     nrvideo.Log.debugCommonVideoEvents(this.player, [
       null,
-      "buffering",
-      "loading",
-      "adaptation",
-      "emsg",
-      "trackschanged",
-      "unloading",
-      "expirationupdated",
-      "largegap",
-      "texttrackvisibility",
-      "trackschanged",
+      'buffering',
+      'loading',
+      'adaptation',
+      'emsg',
+      'trackschanged',
+      'unloading',
+      'expirationupdated',
+      'largegap',
+      'texttrackvisibility',
+      'trackschanged',
     ]);
 
     this.onLoadStartListener = this.onDownload.bind(this);
