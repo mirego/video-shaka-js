@@ -3,6 +3,10 @@ import { version } from "../package.json";
 import ShakaToNewRelicMapper from "./utils/mapper";
 
 export default class ShakaTracker extends nrvideo.VideoTracker {
+  constructor(player, options) {
+    super(player, options);
+    nrvideo.Core.addTracker(this, options);
+  }
   setPlayer(player, tag) {
     if (!tag && player.getMediaElement) tag = player.getMediaElement();
     nrvideo.VideoTracker.prototype.setPlayer.call(this, player, tag);
@@ -83,7 +87,7 @@ export default class ShakaTracker extends nrvideo.VideoTracker {
   }
 
   getPlayerVersion() {
-    return shaka.Player.version;
+    return this.Player?.version;
   }
 
   registerListeners() {

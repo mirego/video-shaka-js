@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## [4.0.1] - 2025-11-13
+
+### Enhancements
+
+- Improved error logging by mapping Shaka errors to the following attributes: `errorCode`, `errorPlatformCode`, `errorMessage`, `errorStackTrace`, `errorSeverity`.
+
+### Updates
+
+- Attached the error `EventListener` to the player instead of its tag, following Shaka's specifications, to fix the `CONTENT_ERROR` event.
+
+## [4.0.0] - 2025-07-28
+
+### Changed
+
+- **Standalone Agent:** This tracker now operates independently with its own authorization details, removing the dependency on a browser agent.
+
+## [3.1.0] - 2025-05-27
+
+### Enhancements
+
+- **Publishing to npm:** The package can now be published to npm, making it easily accessible.
+
+### Build
+
+- **Distribution Formats:** Added `cjs`, `esm`, and `umd` builds to the `dist` folder, ensuring compatibility with CommonJS, ES Modules, and UMD module formats.
+
 ## [3.0.1] - 2025-04-22
 
 - **Update:** The `errorName` attribute has been deprecated and `errorMessage` is introduced as its replacement.
