@@ -1,6 +1,6 @@
 {
-  "name": "@newrelic/video-shaka",
-  "version": "4.0.1",
+  "name": "newrelic-video-shaka",
+  "version": "4.0.2",
   "description": "New relic tracker for shaka player",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -23,7 +23,7 @@
   "author": "Jordi Aguilar",
   "license": "Apache-2.0",
   "dependencies": {
-    "@newrelic/video-core": "^4.0.0",
+    "newrelic-video-core": "github:mirego/jasper-nr-video-core-js#v4.0.2",
     "codem-isoboxer": "^0.3.10"
   },
   "devDependencies": {
