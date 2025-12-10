@@ -21,7 +21,7 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, './dist/umd'),
       filename: 'newrelic-video-shaka.min.js',
-      library: 'ShakaTracker',
+      library: 'nrvideo',
       libraryTarget: 'umd',
       libraryExport: 'default',
     },
@@ -53,7 +53,7 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, './dist/cjs'),
       filename: 'index.js',
-      library: 'ShakaTracker',
+      library: 'nrvideo',
       libraryTarget: 'commonjs2', // CommonJS format
     },
     devtool: 'source-map',

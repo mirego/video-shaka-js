@@ -1,4 +1,4 @@
-import * as nrvideo from "newrelic-video-core";
+import nrvideo from "newrelic-video-core";
 import { version } from "../package.json";
 import ShakaToNewRelicMapper from "./utils/mapper";
 
