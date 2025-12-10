@@ -341,7 +341,7 @@ describe('registerListeners', () => {
       expect.any(Function)
     );
     expect(shakaTracker.player.addEventListener).toHaveBeenCalledWith(
-      "error",
+      'error',
       expect.any(Function)
     );
   });
@@ -395,7 +395,7 @@ describe('unregisterListeners', () => {
       expect.any(Function)
     );
     expect(shakaTracker.player.addEventListener).toHaveBeenCalledWith(
-      "error",
+      'error',
       expect.any(Function)
     );
   });
