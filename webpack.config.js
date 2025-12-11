@@ -62,7 +62,6 @@ module.exports = [
       rules: [
         {
           test: /\.(?:js|mjs|cjs)$/,
-          exclude: /node_modules\/(?!(newrelic-video-core|codem-isoboxer))/,
           use: {
             loader: 'babel-loader',
             options: {
