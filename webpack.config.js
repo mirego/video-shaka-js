@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var TerserPlugin = require('terser-webpack-plugin');
 
 var pkg = require('./package.json');
 var license =
@@ -15,11 +14,11 @@ var license =
   pkg.author;
 
 module.exports = [
+  // Modern build (no ES5 transpilation)
   {
-    //umd
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname, './dist/umd'),
+      path: path.resolve(__dirname, './dist'),
       filename: 'newrelic-video-shaka.min.js',
       library: 'nrvideo',
       libraryTarget: 'umd',
@@ -47,74 +46,42 @@ module.exports = [
       }),
     ],
   },
-  // commonjs buid
+  // Chrome 53+ build (with polyfills)
   {
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname, './dist/cjs'),
-      filename: 'index.js',
+      path: path.resolve(__dirname, './dist'),
+      filename: 'newrelic-video-shaka.es5.min.js',
       library: 'nrvideo',
-      libraryTarget: 'commonjs2', // CommonJS format
+      libraryTarget: 'umd',
+      libraryExport: 'default',
+      globalObject: 'this',
     },
     devtool: 'source-map',
     module: {
       rules: [
         {
-          test: /\.(js|mjs|cjs)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [['@babel/preset-env', { targets: 'defaults' }]],
-            },
-          },
-        },
-      ],
-    },
-    optimization: {
-      minimize: true,
-      minimizer: [new TerserPlugin()],
-    },
-    plugins: [
-      new webpack.BannerPlugin({
-        banner: license,
-        entryOnly: true,
-      }),
-    ],
-  },
-  // ES Module Build
-  {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, './dist/esm'),
-      filename: 'index.js',
-      library: {
-        type: 'module', // ES Module format
-      },
-    },
-    experiments: {
-      outputModule: true, // Enable ES Module output
-    },
-    devtool: 'source-map',
-    module: {
-      rules: [
-        {
-          test: /\.(js|mjs|cjs)$/,
-          exclude: /node_modules/,
+          test: /\.(?:js|mjs|cjs)$/,
+          exclude: /node_modules\/(?!(newrelic-video-core|codem-isoboxer))/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['@babel/preset-env', { targets: 'defaults', modules: false }],
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: {
+                      chrome: '53',
+                    },
+                    useBuiltIns: 'usage',
+                    corejs: 3,
+                  },
+                ],
               ],
             },
           },
         },
       ],
-    },
-    optimization: {
-      minimize: true,
-      minimizer: [new TerserPlugin()],
     },
     plugins: [
       new webpack.BannerPlugin({
